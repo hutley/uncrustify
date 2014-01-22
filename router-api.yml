@@ -1,0 +1,4 @@
+development:
+  url: http://localhost:3010
+production:
+  url: http://serv-router-api-dev.fanhattan.com

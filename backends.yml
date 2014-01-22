@@ -1,0 +1,6 @@
+development:
+  - id: fhapi-31
+    backend_url: http://localhost:4568/
+production:
+  - id: fhapi-31
+    backend_url: http://fhapi.fanhattan.com/

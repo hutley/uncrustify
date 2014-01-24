@@ -1,4 +1,5 @@
 development:
   url: http://localhost:3010
+
 production:
-  url: http://serv-router-api-dev.fanhattan.com
+  url: http://mongo-router-dev-1100.fhaws.com:4001

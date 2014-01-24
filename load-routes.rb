@@ -32,26 +32,20 @@ end
 
 backends.each do |backend|
   response = submit('/backends/'+backend['id'], backend)
-  if response.code != '200'
-    $stdderr.puts "Problem upserting backend. #{backend}.\n #{response.inspect}"
-    exit -1
-  end
-end
-
-backends.each do |backend|
-  response = submit('/backends/'+backend['id'], backend)
-  if response.code != '200'
-    $stdderr.puts "Problem upserting backend. #{backend}.\n #{response.inspect}"
+  if !response.code.start_with?('20')
+    $stderr.puts "Problem upserting backend. #{backend}.\n #{response.inspect}"
     exit -1
   end
 end
 
 routes.each do |route|
   response = submit('/routes', route)
-  if response.code != '200'
-    $stdderr.puts "Problem upserting route. #{route}.\n #{response.inspect}"
+  if !response.code.start_with?('20')
+    $stderr.puts "Problem upserting route. #{route}.\n #{response.inspect}"
     exit -1
   end
 end
 
-$stderr.puts "Succesfully upserted all routes. Run commit.rb to enable new routing table."
+$stderr.puts "Succesfully upserted all routes. Run commit.rb to enable new routing table:"
+$stderr.puts "  #{@router_api_url}/routes/all"
+$stderr.puts "  #{@router_api_url}/backends/all"

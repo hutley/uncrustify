@@ -29,6 +29,7 @@ static bool mark_function_type(chunk_t *pc);
 static void mark_struct_union_body(chunk_t *start);
 static chunk_t *mark_variable_definition(chunk_t *start);
 
+
 static void mark_define_expressions(void);
 static void process_returns(void);
 static chunk_t *process_return(chunk_t *pc);
@@ -583,18 +584,8 @@ void do_symbol_check(chunk_t *prev, chunk_t *pc, chunk_t *next)
     */
    if (next->type == CT_PAREN_OPEN)
    {
-      tmp = chunk_get_next_ncnl(next);
-      if ((cpd.lang_flags & LANG_OC) && chunk_is_token(tmp, CT_CARET))
-      {
-         handle_oc_block_type(tmp);
-
-         // This is the case where a block literal is passed as the first argument of a C-style method invocation.
-         if ((tmp->type == CT_OC_BLOCK_CARET) && (pc->type == CT_WORD))
-         {
-            pc->type = CT_FUNC_CALL;
-         }
-      }
-      else if ((pc->type == CT_WORD) || (pc->type == CT_OPERATOR_VAL))
+      if ((pc->type == CT_WORD) || (pc->type == CT_OPERATOR_VAL)
+          || (pc->type == CT_OC_MSG_CLASS) || (pc->type == CT_OC_MSG_FUNC))
       {
          pc->type = CT_FUNCTION;
       }
@@ -1611,7 +1602,7 @@ static void fix_casts(chunk_t *start)
       count++;
    }
 
-   if ((pc == NULL) || (pc->type != CT_PAREN_CLOSE) || (prev->type == CT_OC_CLASS))
+   if ((pc == NULL) || (pc->type != CT_PAREN_CLOSE) || (prev && prev->type == CT_OC_CLASS))
    {
       LOG_FMT(LCASTS, " -- not a cast, hit [%s]\n",
               pc == NULL ? "NULL"  : get_token_name(pc->type));
@@ -4371,7 +4362,7 @@ static void handle_oc_class(chunk_t *pc)
             tmp->parent_type = CT_OC_CLASS;
          }
       }
-      else if (tmp->type == CT_COLON)
+      else if (tmp->type == CT_COLON || tmp->type == CT_OC_COLON)
       {
          tmp->type = hit_scope ? CT_OC_COLON : CT_CLASS_COLON;
          if (tmp->type == CT_CLASS_COLON)
@@ -4941,31 +4932,32 @@ static void handle_oc_message_send(chunk_t *os)
    }
 
    chunk_t *prev = NULL;
-
+    int cnt = 0;
    for (tmp = chunk_get_next(os); tmp != cs; tmp = chunk_get_next(tmp))
    {
       tmp->flags |= PCF_IN_OC_MSG;
-      if (tmp->level == cs->level + 1)
+      if (tmp->type == CT_COLON)
       {
-         if (tmp->type == CT_COLON)
+         tmp->type = CT_OC_COLON;
+         if ((prev != NULL) && ((prev->type == CT_WORD) || (prev->type == CT_TYPE)))
          {
-            tmp->type = CT_OC_COLON;
-            if ((prev != NULL) && ((prev->type == CT_WORD) || (prev->type == CT_TYPE)))
+            /* Might be a named param, check previous block */
+            chunk_t *pp = chunk_get_prev(prev);
+            if ((pp != NULL) &&
+                (pp->type != CT_OC_COLON) &&
+                (pp->type != CT_ARITH))
             {
-               /* Might be a named param, check previous block */
-               chunk_t *pp = chunk_get_prev(prev);
-               if ((pp != NULL) &&
-                   (pp->type != CT_OC_COLON) &&
-                   (pp->type != CT_ARITH) &&
-                   (pp->type != CT_CARET))
-               {
-                  prev->type       = CT_OC_MSG_NAME;
-                  tmp->parent_type = CT_OC_MSG_NAME;
-               }
+               prev->type       = CT_OC_MSG_NAME;
+               tmp->parent_type = CT_OC_MSG_NAME;
             }
          }
       }
+      if ((cnt <= 1) && ((tmp->type == CT_WORD) || (tmp->type == CT_TYPE)))
+      {
+         tmp->type = (cnt == 0) ? CT_OC_MSG_CLASS : CT_OC_MSG_FUNC;
+      }
       prev = tmp;
+      cnt++;
    }
 }
 

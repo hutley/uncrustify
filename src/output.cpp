@@ -1657,7 +1657,7 @@ static void output_comment_multi_simple(chunk_t *pc)
          }
          else if (ch == '\t')
          {
-            ccol = calc_next_tab_column(ccol, cpd.settings[UO_input_tab_size].n);
+            ccol = calc_next_tab_column(ccol, cpd.settings[UO_output_tab_size].n);
             continue;
          }
          else

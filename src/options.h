@@ -358,7 +358,6 @@ enum uncrustify_options
    UO_sp_after_oc_block_caret,
    UO_sp_after_oc_msg_receiver,
    UO_sp_after_oc_property,
-   UO_sp_after_func_paren_oc_msg,
    UO_sp_cond_colon,
    UO_sp_cond_colon_before,
    UO_sp_cond_colon_after,

@@ -48,7 +48,6 @@ void log_init(FILE *log_file)
    log_set_sev(LSYS, true);
    log_set_sev(LERR, true);
    log_set_sev(LWARN, true);
-    log_set_sev(LSPACE, true);
 
    g_log.log_file = (log_file != NULL) ? log_file : stderr;
 }

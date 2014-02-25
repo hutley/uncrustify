@@ -66,8 +66,6 @@ struct no_space_table_s no_space_table[] =
    { CT_PAREN_CLOSE,    CT_ADDR          },
    { CT_PAREN_CLOSE,    CT_FPAREN_OPEN   },
    { CT_OC_SEL_NAME,    CT_OC_SEL_NAME   },
-    {CT_STRING,         CT_POUND},
-
 };
 
 #define log_rule(rule)                                        \
@@ -1181,12 +1179,6 @@ static argval_t do_space(chunk_t *first, chunk_t *second, int& min_sp, bool comp
       log_rule("ADD");
       return(AV_ADD);
    }
-    if (first->type == CT_PAREN_CLOSE && first->parent_type == CT_OC_PROPERTY && second->type == CT_TYPE)
-    {
-        log_rule("ADD");
-        return(AV_ADD);
-    }
-    
 
    if ((first->type == CT_ARITH) || (first->type == CT_CARET) ||
        (second->type == CT_ARITH) || (second->type == CT_CARET))
@@ -1551,13 +1543,6 @@ static argval_t do_space(chunk_t *first, chunk_t *second, int& min_sp, bool comp
       return cpd.settings[UO_sp_extern_paren].a;
    }
 
-   if ((first->flags & PCF_IN_OC_MSG) &&
-       first->type == CT_FPAREN_CLOSE && second->type == CT_WORD)
-   {
-       log_rule("sp_after_func_paren_oc_msg");
-       return(cpd.settings[UO_sp_after_func_paren_oc_msg].a);
-       
-   }
    for (idx = 0; idx < (int)ARRAY_SIZE(no_space_table); idx++)
    {
       if (((no_space_table[idx].first == CT_UNKNOWN) ||
@@ -1570,9 +1555,8 @@ static argval_t do_space(chunk_t *first, chunk_t *second, int& min_sp, bool comp
          return(AV_REMOVE);
       }
    }
-   //default to ignore...instead of add...
-   log_rule("IGNORE");
-   return(AV_IGNORE);
+   log_rule("ADD");
+   return(AV_ADD);
 }
 
 

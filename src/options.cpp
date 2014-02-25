@@ -495,11 +495,6 @@ void register_options(void)
    unc_add_option("sp_after_oc_property", UO_sp_after_oc_property, AT_IARF,
                   "Add or remove space after @property.");
 
-    unc_add_option("sp_after_func_paren_oc_msg", UO_sp_after_func_paren_oc_msg, AT_IARF,
-                   "Add or remove space between function paren message in oc msg\n"
-                   "'[test() doSomething]' vs. '[test()doSomething]'");
-    
-    
    unc_add_option("sp_cond_colon", UO_sp_cond_colon, AT_IARF,
                   "Add or remove space around the ':' in 'b ? t : f'");
    unc_add_option("sp_cond_colon_before", UO_sp_cond_colon_before, AT_IARF,

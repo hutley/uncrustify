@@ -7,3 +7,8 @@
   route_type: "prefix"
   handler: "backend"
   backend_id: "fhapi-31"
+
+- incoming_path: "/3.2/test"
+  route_type: "prefix"
+  handler: "backend"
+  backend_id: "fhapi-32"

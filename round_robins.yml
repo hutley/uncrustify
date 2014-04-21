@@ -1,0 +1,10 @@
+test:
+  - id: fhapi-32
+    host: pancakes.fanhattan.com
+    max_fails: 3
+    fail_timeout: 30
+    upstreams:
+      - - 127.0.0.1:8675
+        - 127.0.0.1:8676
+      - - serv-pancakes-dev-1100.fhaws.com
+        - serv-pancakes-dev-1200.fhaws.com

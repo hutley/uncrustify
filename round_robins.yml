@@ -6,5 +6,37 @@ test:
     upstreams:
       - - 127.0.0.1:8675
         - 127.0.0.1:8676
-      - - serv-pancakes-dev-1100.fhaws.com
-        - serv-pancakes-dev-1200.fhaws.com
+      - - serv-pancakes-dev-1100.fhaws.com:80
+        - serv-pancakes-dev-1200.fhaws.com:80
+development:
+  - id: fhapi-30
+    host: localhost
+    max_fails: 3
+    fail_timeout: 30
+    upstreams:
+      - - 127.0.0.1:8675
+        - 127.0.0.1:8676
+  - id: fhapi-31
+    host: localhost
+    max_fails: 3
+    fail_timeout: 30
+    upstreams:
+      - - 127.0.0.1:8675
+        - 127.0.0.1:8676
+production:
+  - id: fhapi-30
+    host: serv-fhapi-dev.fanhattan.com
+    max_fails: 3
+    fail_timeout: 30
+    upstreams:
+      - - serv-fhapi-dev-1100.fhaws.com:80
+        - serv-fhapi-dev-1100.fhaws.com:80
+        - serv-fhapi-dev-1100.fhaws.com:80
+  - id: fhapi-31
+    host: serv-fhapi-dev.fanhattan.com
+    max_fails: 3
+    fail_timeout: 30
+    upstreams:
+      - - serv-fhapi-dev-1100.fhaws.com:80
+        - serv-fhapi-dev-1100.fhaws.com:80
+        - serv-fhapi-dev-1100.fhaws.com:80

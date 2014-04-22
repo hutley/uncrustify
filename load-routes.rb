@@ -11,7 +11,7 @@ def load_yaml(name)
   YAML.load(File.read('./'+name+'.yml'))
 end
 
-backends = load_yaml('backends')[env]
+backends = load_yaml('backends')[env] || []
 round_robins = load_yaml('round_robins')[env]
 routes = load_yaml('routes')
 

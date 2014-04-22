@@ -1,3 +1,6 @@
+test:
+  url: http://localhost:3010
+
 development:
   url: http://localhost:3010
 

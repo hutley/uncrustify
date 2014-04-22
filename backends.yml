@@ -1,3 +1,10 @@
+test:
+  - id: fhapi-30
+    backend_url: http://localhost:4568/
+
+  - id: fhapi-31
+    backend_url: http://localhost:4568/
+
 development:
   - id: fhapi-30
     backend_url: http://localhost:4568/
@@ -7,8 +14,3 @@ development:
 
 
 production:
-  - id: fhapi-30
-    backend_url: http://api-tv-dev.fanhattan.com/
-
-  - id: fhapi-31
-    backend_url: http://api-tv-dev.fanhattan.com/

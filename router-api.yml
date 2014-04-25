@@ -4,5 +4,8 @@ test:
 development:
   url: http://localhost:3010
 
-production:
+cloud_dev:
   url: http://mongo-router-dev-1100.fhaws.com:4001
+
+cloud_prod:
+  url: http://mongo-router-prod.fhaws.com:4001

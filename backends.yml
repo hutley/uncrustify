@@ -11,6 +11,3 @@ development:
 
   - id: fhapi-31
     backend_url: http://localhost:4568/
-
-
-production:

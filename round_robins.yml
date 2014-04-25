@@ -23,7 +23,7 @@ development:
     upstreams:
       - - 127.0.0.1:8675
         - 127.0.0.1:8676
-cloud-dev:
+cloud_dev:
   - id: fhapi
     host: serv-fhapi-dev.fanhattan.com
     max_fails: 3
@@ -32,7 +32,7 @@ cloud-dev:
       - - serv-fhapi-dev-1100.fhaws.com:80
         - serv-fhapi-dev-1100.fhaws.com:80
         - serv-fhapi-dev-1100.fhaws.com:80
-cloud-prod:
+cloud_prod:
   - id: fhapi
     host: serv-fhapi-prod.fanhattan.com
     max_fails: 3

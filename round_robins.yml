@@ -25,7 +25,7 @@ development:
         - 127.0.0.1:8676
 cloud_dev:
   - id: fhapi
-    host: serv-fhapi-dev.fanhattan.com
+    host:
     max_fails: 3
     fail_timeout: 30
     upstreams:
@@ -34,7 +34,7 @@ cloud_dev:
         - serv-fhapi-dev-1100.fhaws.com:80
 cloud_prod:
   - id: fhapi
-    host: serv-fhapi-prod.fanhattan.com
+    host:
     max_fails: 3
     fail_timeout: 30
     upstreams:

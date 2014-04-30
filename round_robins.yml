@@ -38,6 +38,9 @@ cloud_prod:
     max_fails: 3
     fail_timeout: 30
     upstreams:
-      - - serv-fhapi-prod-1100.fhaws.com:80
-        - serv-fhapi-prod-1200.fhaws.com:80
-        - serv-fhapi-prod-1400.fhaws.com:80
+      - - serv-fhapi-prod-1101.fhaws.com:80
+        - serv-fhapi-prod-1102.fhaws.com:80
+        - serv-fhapi-prod-1201.fhaws.com:80
+        - serv-fhapi-prod-1202.fhaws.com:80
+        - serv-fhapi-prod-1401.fhaws.com:80
+        - serv-fhapi-prod-1402.fhaws.com:80

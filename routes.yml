@@ -1,4 +1,0 @@
-- incoming_path: "/"
-  route_type: "prefix"
-  handler: "backend"
-  backend_id: "fhapi"

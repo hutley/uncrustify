@@ -10,7 +10,7 @@ struct file_lang languages[] =
    { ".p",    "",     LANG_PAWN },
    { ".sma",  "",     LANG_PAWN },
    { ".inl",  "",     LANG_PAWN },
-   { ".h",    "",     LANG_CPP  },
+    { ".h", "OC", LANG_OC | LANG_CPP },
    { ".cxx",  "",     LANG_CPP  },
    { ".hpp",  "",     LANG_CPP  },
    { ".hxx",  "",     LANG_CPP  },
